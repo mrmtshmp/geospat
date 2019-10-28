@@ -2,13 +2,13 @@
 % Please edit documentation in R/large.extractCoords.R
 \name{extractCoords}
 \alias{extractCoords}
-\title{Extract coord matrix from SpatialPolygonDataframe and return the centroid of each block.}
+\title{Extract coord matrix from SpatialPolygonDataframe@polygon (list-object).}
 \usage{
 extractCoords(polygons)
 }
 \arguments{
-\item{large.sp.df}{a SpatialPolygonDataframe-class object.}
+\item{polygons}{object.}
 }
 \description{
-Extract coord matrix from SpatialPolygonDataframe and return the centroid of each block.
+Extract coord matrix from SpatialPolygonDataframe@polygon (list-object).
 }
