@@ -1,0 +1,12 @@
+citHeader("To cite geospat in publications use:")
+
+bibentry(
+  entry    = "Manual",
+  title    = "Functions for geospatial analysis.",
+  author   = "Simpei Morimoto",
+  year     = "2019",
+  url      = "https://github.com/mrmtshmp/geospat",
+  textVersion = paste(
+  "Morimoto, S. (2019) geospat: Functions for geospatial analysis. "
+  )
+)
