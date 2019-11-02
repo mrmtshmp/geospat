@@ -17,8 +17,9 @@
 #' @param select_col.mesh_pop Column selector for mesh data (SpatialPolygonDataFrame@data$...)
 #' @param fn.mesh.popEst Filename of mesh data.
 #' @param fn.Wakayama_Ph Filename (.csv) of locations.
-#' @param fn.RData.output_
-#' @param fn.RData.output_
+#' @param fn.RData.output_df.res.distm  A character vector.
+#' @param fn.RData.output_long.df.res.distm  A character vector.
+#' @param fn.RData.output_long.df.res.distm.with_score  A character vector.
 #'
 #' @export
 
@@ -48,8 +49,12 @@ loc_score.weight_mesh_val <- function(
     "../Data/500m_mesh_suikei_2018_shape_30/500m_mesh_2018_30.shp"
   ),
 
-  fn.Wakayama_Ph = "Wakayama_MasterAnaData.csv"
-){
+  fn.Wakayama_Ph = "Wakayama_MasterAnaData.csv",
+
+  fn.RData.output_df.res.distm = NULL,
+  fn.RData.output_long.df.res.distm = NULL,
+  fn.RData.output_long.df.res.distm.with_score = NULL
+  ){
 
   ANS <- readline(
     "This programme will take very long runtime. Would you stop it? [Yes/No]"
@@ -166,10 +171,13 @@ loc_score.weight_mesh_val <- function(
 
   rm(df.res.distm)
 
-  save(
-    long.df.res.distm,
-    file = fn.RData.output_long.df.res.distm
+  if(!is.null(fn.RData.output_df.res.distm)){
+    save(
+      long.df.res.distm,
+      file = fn.RData.output_df.res.distm
     )
+    }
+
 
   # dist.sum ----------------------------------------------------------------
 
@@ -190,7 +198,6 @@ loc_score.weight_mesh_val <- function(
       file = fn.RData.output_long.df.res.distm
     )
     }
-
 
   long.df.res.distm.rank_1.score_col <-
     long.df.res.distm.rank_1 %>%

@@ -12,7 +12,10 @@
   "../Data/500m_mesh_suikei_2018_shape_27/500m_mesh_2018_27.shp",
   "../Data/500m_mesh_suikei_2018_shape_29/500m_mesh_2018_29.shp",
   "../Data/500m_mesh_suikei_2018_shape_30/500m_mesh_2018_30.shp"),
-  fn.Wakayama_Ph = "Wakayama_MasterAnaData.csv")
+  fn.Wakayama_Ph = "Wakayama_MasterAnaData.csv",
+  fn.RData.output_df.res.distm = NULL,
+  fn.RData.output_long.df.res.distm = NULL,
+  fn.RData.output_long.df.res.distm.with_score = NULL)
 }
 \arguments{
 \item{fn.SpatialPointDataFrame}{RData file of SpatialPolygonDataFrame}
@@ -27,7 +30,11 @@
 
 \item{fn.Wakayama_Ph}{Filename (.csv) of locations.}
 
-\item{fn.RData.output_}{}
+\item{fn.RData.output_df.res.distm}{A character vector.}
+
+\item{fn.RData.output_long.df.res.distm}{A character vector.}
+
+\item{fn.RData.output_long.df.res.distm.with_score}{A character vector.}
 }
 \description{
 Location score weighting by values on meshes.
