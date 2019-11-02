@@ -8,6 +8,7 @@
 #' @importFrom rgdal readOGR
 #' @importFrom plyr ldply
 #' @importFrom dplyr select
+#' @importFrom plyr .
 #' @importFrom plyr ddply
 #' @importFrom tibble rownames_to_column
 #' @importFrom tidyr gather
