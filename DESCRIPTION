@@ -20,4 +20,5 @@ Imports:
     tidyr,
     dplyr,
     rgdal,
-    plyr
+    plyr,
+    tibble

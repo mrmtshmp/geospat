@@ -4,9 +4,12 @@
 #' @import sf
 #' @importFrom geosphere centroid
 #' @importFrom geosphere distm
+#' @importFrom geosphere distGeo
 #' @importFrom rgdal readOGR
 #' @importFrom plyr ldply
 #' @importFrom dplyr select
+#' @importFrom plyr ddply
+#' @importFrom tibble rownames_to_column
 #' @importFrom tidyr gather
 #' @importFrom dplyr arrange
 #' @importFrom dplyr mutate
