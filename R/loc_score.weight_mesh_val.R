@@ -5,6 +5,7 @@
 #' @importFrom geosphere centroid
 #' @importFrom geosphere distm
 #' @importFrom rgdal readOGR
+#' @importFrom plyr ldply
 #' @importFrom dplyr select
 #' @importFrom tidyr gather
 #' @importFrom dplyr arrange

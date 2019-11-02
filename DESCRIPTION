@@ -19,4 +19,5 @@ Imports:
     magrittr,
     tidyr,
     dplyr,
-    rgdal
+    rgdal,
+    plyr
