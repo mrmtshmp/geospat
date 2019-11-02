@@ -35,6 +35,7 @@ cntrd <- function(mat, var.long, var.lat) {
 #' Extract coord matrix from SpatialPolygonDataframe and return the centroid of each block.
 #'
 #' @importFrom geosphere centroid
+#' @importFrom plyr ldply
 #'
 #' @param large.sp.df a SpatialPolygonDataframe-class object.
 #'
