@@ -1,7 +1,15 @@
 #' Location score weighting by values on meshes.
 #'
+#' @import sp
+#' @import sf
 #' @importFrom geosphere centroid
-#'
+#' @importFrom geosphere distm
+#' @importFrom rgdal readOGR
+#' @importFrom dplyr select
+#' @importFrom tidyr gather
+#' @importFrom dplyr arrange
+#' @importFrom dplyr mutate
+#' @importFrom magrittr %>%
 #'
 #' @param fn.SpatialPointDataFrame RData file of SpatialPolygonDataFrame
 #' @param crs_default projection.
@@ -9,8 +17,6 @@
 #' @param select_col.mesh_pop Column selector for mesh data (SpatialPolygonDataFrame@data$...)
 #' @param fn.mesh.popEst Filename of mesh data.
 #' @param fn.Wakayama_Ph Filename (.csv) of locations.
-#' @param fn.plot_hist.distance_to_Ph_from_mesh
-#' @param fn.plot_hist.score_of_Pharm
 #'
 #'
 #' @export
@@ -20,7 +26,7 @@
 # source(sprintf("%s/%s", dir.Sub, fn.Sub_require_libraries))
 
 loc_score.weight_mesh_val <- function(
-  dir.Output = "../Output",
+
   fn.SpatialPointDataFrame  = '../Output/DataForMap.Wakayama_v01.RData',
 
   crs_default = '+init=epsg:4612',
@@ -43,13 +49,19 @@ loc_score.weight_mesh_val <- function(
 
   fn.Wakayama_Ph = "Wakayama_MasterAnaData.csv"
 ){
+
+  ANS <- readline(
+    "This programme will take very long runtime. Would you stop it? [Yes/No]"
+    )
+  if (ANS != "No") stop('Proccess was stopped by user.')
+
   # Load data ---------------------------------------------------------------
 
   load(
     file = fn.SpatialPointDataFrame
   )
 
-  print("Loading shape (a) file(s).")
+  print("Loading (a) shape file(s).")
   for(i in 1:length(fn.mesh.popEst)){
     i.Shape.mesh.pop_Est <-
       rgdal::readOGR(

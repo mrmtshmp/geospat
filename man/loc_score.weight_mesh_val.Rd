@@ -4,8 +4,8 @@
 \alias{loc_score.weight_mesh_val}
 \title{Location score weighting by values on meshes.}
 \usage{
-loc_score.weight_mesh_val(dir.Output = "../Output",
-  fn.SpatialPointDataFrame = "../Output/DataForMap.Wakayama_v01.RData",
+
+  loc_score.weight_mesh_val(fn.SpatialPointDataFrame = "../Output/DataForMap.Wakayama_v01.RData",
   crs_default = "+init=epsg:4612", rank.restrict = 5,
   select_col.mesh_pop = c("PTC_2020", "PTD_2020", "PTE_2020"),
   fn.mesh.popEst = c("../Data/500m_mesh_suikei_2018_shape_24/500m_mesh_2018_24.shp",
@@ -26,8 +26,6 @@ loc_score.weight_mesh_val(dir.Output = "../Output",
 \item{fn.mesh.popEst}{Filename of mesh data.}
 
 \item{fn.Wakayama_Ph}{Filename (.csv) of locations.}
-
-\item{fn.plot_hist.score_of_Pharm}{}
 }
 \description{
 Location score weighting by values on meshes.

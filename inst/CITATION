@@ -1,7 +1,7 @@
 citHeader("To cite geospat in publications use:")
 
 bibentry(
-  entry    = "Manual",
+  bibtype    = "Manual",
   title    = "Functions for geospatial analysis.",
   author   = "Simpei Morimoto",
   year     = "2019",
