@@ -17,7 +17,8 @@
 #' @param select_col.mesh_pop Column selector for mesh data (SpatialPolygonDataFrame@data$...)
 #' @param fn.mesh.popEst Filename of mesh data.
 #' @param fn.Wakayama_Ph Filename (.csv) of locations.
-#'
+#' @param fn.RData.output_
+#' @param fn.RData.output_
 #'
 #' @export
 
@@ -132,6 +133,7 @@ loc_score.weight_mesh_val <- function(
       eval(select_col.mesh_pop)
     )
 
+  rm(Shape.mesh.pop_Est)
 
   ## *CAUTION Running this pipe takes long time.
 
@@ -160,6 +162,15 @@ loc_score.weight_mesh_val <- function(
     )
   ## ## ## ## ## ## ## ## ##
 
+  print("FIN_*CAUTION Running this pipe takes long time.")
+
+  rm(df.res.distm)
+
+  save(
+    long.df.res.distm,
+    file = fn.RData.output_long.df.res.distm
+    )
+
   # dist.sum ----------------------------------------------------------------
 
   long.df.res.distm.rank_1 <-
@@ -170,6 +181,16 @@ loc_score.weight_mesh_val <- function(
       weight.ID,
       by = "MESH_ID"
     )
+
+  rm(long.df.res.distm)
+
+  if(!is.null(fn.RData.output_long.df.res.distm)){
+    save(
+      long.df.res.distm.rank_1,
+      file = fn.RData.output_long.df.res.distm
+    )
+    }
+
 
   long.df.res.distm.rank_1.score_col <-
     long.df.res.distm.rank_1 %>%
@@ -188,6 +209,12 @@ loc_score.weight_mesh_val <- function(
         dplyr::select(score)
     )
 
+  if(!is.null(fn.RData.output_long.df.res.distm.with_score)){
+    save(
+      long.df.res.distm.rank_1,
+      file = fn.RData.output_long.df.res.distm.with_score
+    )
+    }
 
   # Merge score on each Pharmacy (weighted by population).
 

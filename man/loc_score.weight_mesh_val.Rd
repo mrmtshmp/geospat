@@ -26,6 +26,8 @@
 \item{fn.mesh.popEst}{Filename of mesh data.}
 
 \item{fn.Wakayama_Ph}{Filename (.csv) of locations.}
+
+\item{fn.RData.output_}{}
 }
 \description{
 Location score weighting by values on meshes.
