@@ -22,3 +22,7 @@ Imports:
     rgdal,
     plyr,
     tibble
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

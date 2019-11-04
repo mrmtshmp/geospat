@@ -8,6 +8,7 @@
 #' @importFrom rgdal readOGR
 #' @importFrom plyr ldply
 #' @importFrom dplyr select
+#' @importFrom dplyr left_join
 #' @importFrom plyr .
 #' @importFrom plyr ddply
 #' @importFrom tibble rownames_to_column
@@ -21,7 +22,7 @@
 #' @param rank.restrict Rank restriction. Default=5.
 #' @param select_col.mesh_pop Column selector for mesh data (SpatialPolygonDataFrame@data$...)
 #' @param fn.mesh.popEst Filename of mesh data.
-#' @param fn.Wakayama_Ph Filename (.csv) of locations.
+#' @param fn.LonLat_and_data.facilities Filename (.csv) of locations.
 #' @param fn.RData.output_df.res.distm  A character vector.
 #' @param fn.RData.output_long.df.res.distm  A character vector.
 #' @param fn.RData.output_long.df.res.distm.with_score  A character vector.
@@ -32,7 +33,7 @@
 # fn.Sub_require_libraries = "require_libraries.R"
 # source(sprintf("%s/%s", dir.Sub, fn.Sub_require_libraries))
 
-loc_score.weight_mesh_val <- function(
+wSDG <- function(
 
   fn.SpatialPointDataFrame  = '../Output/DataForMap.Wakayama_v01.RData',
 
@@ -54,7 +55,7 @@ loc_score.weight_mesh_val <- function(
     "../Data/500m_mesh_suikei_2018_shape_30/500m_mesh_2018_30.shp"
   ),
 
-  fn.Wakayama_Ph = "Wakayama_MasterAnaData.csv",
+  fn.LonLat_and_data.facilities = "Wakayama_MasterAnaData.csv",
 
   fn.RData.output_df.res.distm = NULL,
   fn.RData.output_long.df.res.distm = NULL,
@@ -148,9 +149,10 @@ loc_score.weight_mesh_val <- function(
   ## *CAUTION Running this pipe takes long time.
 
   print("*CAUTION Running this pipe takes long time.")
+
   long.df.res.distm <-
     df.res.distm %>%
-    rownames_to_column(
+    tibble::rownames_to_column(
       "MESH_ID"
     ) %>%
     gather(
@@ -190,7 +192,7 @@ loc_score.weight_mesh_val <- function(
     long.df.res.distm[
       long.df.res.distm$rank <= rank.restrict,
       ] %>%
-    left_join(
+    dplyr::left_join(
       weight.ID,
       by = "MESH_ID"
     )
@@ -242,7 +244,10 @@ loc_score.weight_mesh_val <- function(
           X = matrix(c("DUMMY",select_col.mesh_pop),nrow = 1),
           MARGIN = 2,
           function(col){
-            score.merged <- sum(Ph[,col] * Ph[,"score"])
+            score.merged <-
+              sum(
+                Ph[,col] * Ph[,"score"]
+                )
             res <- assign(
               x = sprintf("score.merged_%s",col),
               score.merged
