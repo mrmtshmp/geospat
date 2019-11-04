@@ -1,5 +1,5 @@
 ---
-title: "An Estimation for Workloads in Facilities  Using the Geo-Information and Gridded Weights on on a Map."
+title: "An Estimation for Workloads in Facilities  Using the Geo-Information and Gridded Weights on a Map."
 author: Shimpei Morimoto, 2019
 output: 
   html_document:
