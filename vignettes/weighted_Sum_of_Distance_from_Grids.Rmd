@@ -1,5 +1,5 @@
 ---
-title: "Estimation for Workloads on a Map Using Facilities' Geo-Information and Grid Population."
+title: "An Estimation for Workloads in Facilities  Using the Geo-Information and Gridded Weights on on a Map."
 author: Shimpei Morimoto, 2019
 output: 
   html_document:
@@ -8,7 +8,7 @@ output:
     toc: true
     section_numbering: true
 vignette: >
-  %\VignetteIndexEntry{A Method to Map Estimated Workloads Using Facilities' Geo-Information and Grid Population.}
+  %\VignetteIndexEntry{An Estimation for Workloads in Facilities  Using the Geo-Information and Gridded Weights on on a Map.}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
