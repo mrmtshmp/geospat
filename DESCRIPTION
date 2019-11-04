@@ -21,7 +21,10 @@ Imports:
     dplyr,
     rgdal,
     plyr,
-    tibble
+    tibble,
+    leaflet,
+    raster,
+    ggplot2
 Suggests: 
     knitr,
     rmarkdown
