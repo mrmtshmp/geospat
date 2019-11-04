@@ -31,10 +31,12 @@ library(geospat)
 ```
 
 # 1. Motivation of analysis.
-__*geospat*__ is an R package for calculation of *weighted Sum of Distance from Grids (wSDG)*. The *wSDG* is an estimate of relative workload, calculated on each facility from geo-information (e.g., longitude and latitude) of the facilities and spatial distribution of the users with weight, e.g., population. This algrithm was developped to estimate workloads in community pharmacies taking acount for inconsistency between distributions of pharmacies and population densities. In this vignette, an explanation of the algorithm is presented, using a toy-example with flowers and beeswarm in grassland. The analysis can be conducted from the `wSDG()` function in this package.
+__*geospat*__ is an R package for calculation of *weighted Sum of Distance from Grids (wSDG)*. The *wSDG* is an estimate of relative workload, calculated on each facility from geo-information (e.g., longitude and latitude) of the facilities and spatial distribution of the users with weight, e.g., population.  
+This algrithm was developped to estimate workloads in community pharmacies taking acount for distributions of pharmacies which is inconsistent with population densities. In this vignette, an explanation of the algorithm is presented, using a bucolic-toy example set in grassland.  
+The analysis can be conducted from the `wSDG()` function in this package.
 
 # 2. A toy example -- a grassland.
-In advance, I would like to point out that I'm not an entomologist; so 
+In advance, I would like to point out that I'm not an entomologist; so there would be some unrealistic behaviors in the bees in following example. I appreciate for any suggestion to correct  
 
 
 ```{r echo=FALSE, label=Fig.1, out.width = "85%",  fig.cap = "A toy example -- beeswarms and flowers in grass land."}
