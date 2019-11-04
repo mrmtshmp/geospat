@@ -294,7 +294,8 @@ loc_score <- function(
     list(
       long.df.res.distm.rank_1,
       long.long.df.res.distm.rank_1.merge_mesh_on_pharm,
-      rank.restrict
+      rank.restrict,
+      alg.score
     )
   )
 }
