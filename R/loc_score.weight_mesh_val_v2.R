@@ -20,7 +20,7 @@
 #' @param fn.SpatialPointDataFrame RData file of SpatialPolygonDataFrame
 #' @param crs_default projection.
 #' @param rank.restrict Rank restriction. Default=5.
-#' @param alg.score Selector of scoring algorithm ("HmMs", "wSDG" or any function-class object).
+#' @param alg.score Selector of scoring algorithm ("HmMs", "nwSS" or any function-class object).
 #' @param select_col.mesh_pop Column selector for mesh data (SpatialPolygonDataFrame@data$...)
 #' @param fn.mesh.popEst Filename of mesh data.
 #' @param fn.LonLat_and_data.facilities Filename (.csv) of locations.
@@ -34,7 +34,7 @@
 # fn.Sub_require_libraries = "require_libraries.R"
 # source(sprintf("%s/%s", dir.Sub, fn.Sub_require_libraries))
 
-loc_score <- function(
+wSDG <- function(
 
   fn.SpatialPointDataFrame  = '../Output/DataForMap.Wakayama_v01.RData',
 
@@ -176,7 +176,7 @@ loc_score <- function(
     )
   ## ## ## ## ## ## ## ## ##
 
-  print("FIN_*CAUTION Running this pipe takes long time.")
+  print("**DONE**CAUTION Running this pipe takes long time.")
 
   rm(df.res.distm)
 
@@ -208,7 +208,7 @@ loc_score <- function(
     )
     }
 
-  if(alg.score=="wSDG"){
+  if(alg.score=="nwSS"){
     fun.score = function(vec.dist){
       score <- sum(vec.dist**2)/vec.dist**2
       return(score)

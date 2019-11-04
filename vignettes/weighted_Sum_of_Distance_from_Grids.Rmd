@@ -37,15 +37,20 @@ __*geospat*__ is an R package for calculation of *weighted Sum of Distance from 
 In advance, I would like to point out that I'm not an entomologist; so 
 
 
-```{r echo=FALSE, label, out.width = "85%",  fig.cap = "A toy example in grass land."}
+```{r echo=FALSE, label=Fig.1, out.width = "85%",  fig.cap = "A toy example -- beeswarms and flowers in grass land."}
 require(knitr)
 include_graphics("Fig1.png")
-include_graphics("Fig2.png")
-include_graphics("Fig3.png")
 ```
-
+```{r echo=FALSE, label=Fig.2, out.width = "85%",  fig.cap = "Stepping into bees' shoes, flowers bloom at whimsical points around their swarms."}
+require(knitr)
+include_graphics("Fig2.png")
+```
 
 # 3. The algorithm.
 Initially, 
 $\frac{\sum_{i=1}^{k}{a_i^2}}{a_l}\ \ \| l \in [1,k]\subset \mathbb{Z}$
 
+```{r echo=FALSE, label=Fig.3, out.width = "85%",  fig.cap = "Results from the algorithm 1: *wSDG*."}
+require(knitr)
+include_graphics("Fig3.png")
+```
