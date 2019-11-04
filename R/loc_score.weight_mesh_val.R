@@ -20,6 +20,7 @@
 #' @param fn.SpatialPointDataFrame RData file of SpatialPolygonDataFrame
 #' @param crs_default projection.
 #' @param rank.restrict Rank restriction. Default=5.
+#' @param alg.score Selector of scoring algorithm ("HmMs", "nwSS" or any function-class object).
 #' @param select_col.mesh_pop Column selector for mesh data (SpatialPolygonDataFrame@data$...)
 #' @param fn.mesh.popEst Filename of mesh data.
 #' @param fn.LonLat_and_data.facilities Filename (.csv) of locations.
@@ -42,6 +43,7 @@ wSDG <- function(
   # Settings for analysis ---------------------------------------------------
 
   rank.restrict = 5,
+  alg.score = "HmMs",
   select_col.mesh_pop = c(
     "PTC_2020", "PTD_2020", "PTE_2020"
   ),
@@ -174,7 +176,7 @@ wSDG <- function(
     )
   ## ## ## ## ## ## ## ## ##
 
-  print("FIN_*CAUTION Running this pipe takes long time.")
+  print("**DONE**CAUTION Running this pipe takes long time.")
 
   rm(df.res.distm)
 
@@ -206,12 +208,33 @@ wSDG <- function(
     )
     }
 
+  if(alg.score=="nwSS"){
+    fun.score = function(vec.dist){
+      score <- sum(vec.dist**2)/vec.dist**2
+      return(score)
+      }
+  }
+
+  if(alg.score=="HmMs"){
+    fun.score = function(vec.dist){
+      score <-
+        (
+          rank.restrict/sum(1/vec.dist)
+          )/vec.dist
+      return(score)
+      }
+  }
+
+  if(class(alg.score)=="function"){
+    fun.score = alg.score
+    }
+
   long.df.res.distm.rank_1.score_col <-
     long.df.res.distm.rank_1 %>%
     ddply(
       .(MESH_ID),
       function(MESH){
-        score <- sum(MESH$dist**2)/MESH$dist**2
+        score <- fun.score(MESH$dist)
         return(data.frame(score))
       }
     )
@@ -271,7 +294,8 @@ wSDG <- function(
     list(
       long.df.res.distm.rank_1,
       long.long.df.res.distm.rank_1.merge_mesh_on_pharm,
-      rank.restrict
+      rank.restrict,
+      alg.score
     )
   )
 }
