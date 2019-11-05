@@ -31,17 +31,17 @@
 
 
 plot.wSDG <- function(
-  fn.RData.loc_score = "../Data/test_HmMs_2035.RData",
+  fn.RData.loc_score = "../Data/test_HmMs_2050.RData",
   rbPal = NULL,
   vec.prob_q = NULL,
   dir.Data = "../Data",
-  weight.var_name = "score.merged_PTD_2035",
+  weight.var_name = "score.merged_PTD_2050",
   fn.Shape.GovRegion = c(
     '/190706/N03-190101_30_GML/N03-19_30_190101.shp',
     '/190706/N03-190101_24_GML/N03-19_24_190101.shp',
     '/190706/N03-190101_27_GML/N03-19_27_190101.shp',
     '/190706/N03-190101_29_GML/N03-19_29_190101.shp'
-  ),
+    ),
   fn.ShapeP.SchoolRegion = "/190626/A32-16_30_GML/shape/A32P-16_30.shp",
   fn.Shape.SchoolRegion = "/190706/A32-13_30/shp/A32-13_30.shp",
 
@@ -182,6 +182,18 @@ plot.wSDG <- function(
     ) %>%
     unique()
 
+  print(
+    sprintf(
+      "Output File is: %s",
+      sprintf(
+        "%s_%s.rank_%s.algscore_%s.pdf",
+        prefix.pdf_output,
+        unique(test.sptsDataframe@data$weight),
+        rank.restrict,
+        alg.score
+        )
+      )
+    )
   pdf(
     sprintf(
       "%s_%s.rank_%s.algscore_%s.pdf",
