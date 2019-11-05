@@ -205,6 +205,7 @@ plot.wSDG <- function(
     width = 20,
     height = 20
   )
+  print(test.sptsDataframe@data$Col)
   plot(Shape.GovRegion, col='white', lwd=0.05)
   plot(Shape.SchoolRegion, col='ivory', lwd=0.05, add=TRUE)
   graphics::points(
