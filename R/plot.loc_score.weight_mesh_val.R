@@ -45,7 +45,7 @@ plot.wSDG <- function(
   fn.ShapeP.SchoolRegion = "/190626/A32-16_30_GML/shape/A32P-16_30.shp",
   fn.Shape.SchoolRegion = "/190706/A32-13_30/shp/A32-13_30.shp",
 
-  prefix.pdf_output = "location_score.only_pref_30.weight"
+  prefix.pdf_output = "location_score.weight"
 ){
 
   # Data Loading -----------------------------------------------------------------
@@ -264,6 +264,28 @@ plot.wSDG <- function(
       scale_fill_identity(guide = "legend") +
       scale_x_continuous(trans = 'log10') +
       facet_grid(ID.pref~., scales = 'free_y') +
+      ggtitle(label = weight.var_name) +
+      theme_bw()
+  )
+  dev.off()
+
+  ggdata <-
+    long.long.df.res.distm.rank_1.merge_mesh_on_pharm %>%
+#    dplyr::filter(weight==weight.var_name) %>%
+    mutate(
+      ID.pref = gsub('(.+)_(.+)', '\\1', Ph.ID)
+    ) %>%
+    ggplot(
+      aes(x=val)
+    )
+
+  plot(
+    ggdata +
+      geom_histogram(aes(fill=Col)) +
+      scale_fill_identity(guide = "legend") +
+      scale_x_continuous(trans = 'log10') +
+      facet_grid(ID.pref~., scales = 'free_y') +
+      ggtitle(label = "Merged") +
       theme_bw()
   )
   dev.off()
