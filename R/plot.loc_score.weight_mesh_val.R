@@ -31,11 +31,11 @@
 
 
 plot.wSDG <- function(
-  fn.RData.loc_score = "../Data/test_HmMs_2050.RData",
+  fn.RData.loc_score = "../Data/test_HmMs_2025.RData",
   rbPal = NULL,
   vec.prob_q = NULL,
   dir.Data = "../Data",
-  weight.var_name = c("score.merged_PTD_2050","score.merged_PTE_2050"),
+  weight.var_name = c("score.merged_PTD_2025","score.merged_PTE_2025"),
   fn.Shape.GovRegion = c(
     '/190706/N03-190101_30_GML/N03-19_30_190101.shp',
     '/190706/N03-190101_24_GML/N03-19_24_190101.shp',
@@ -158,10 +158,13 @@ plot.wSDG <- function(
       ID,
       Numb.FullTime,
       Numb.PartTime,
-      Ph.ID
+      Ph.ID,
+      weight
       ),
       function(D){
-        sum(D$val)
+        val = sum(D$val)
+        names(val) <- "val"
+        return(val)
         }
       )
 
@@ -203,8 +206,7 @@ plot.wSDG <- function(
         paste(
           unique(
             test.sptsDataframe@data$weight
-            ),
-          "_"
+            ),collapse = "_"
           ),
         rank.restrict,
         alg.score
