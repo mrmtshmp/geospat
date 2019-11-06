@@ -262,6 +262,8 @@ plot.wSDG <- function(
   )
   dev.off()
 
-  return(fn.RData.loc_score,weight.var_name,rbPal, vec.prob_q)
+  return(list(
+    fn.RData.loc_score,weight.var_name,rbPal, vec.prob_q)
+    )
 }
 
