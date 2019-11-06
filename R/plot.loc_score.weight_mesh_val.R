@@ -250,6 +250,7 @@ plot.wSDG <- function(
 
   ggdata <-
     long.long.df.res.distm.rank_1.merge_mesh_on_pharm %>%
+    dplyr::filter(weight==weight.var_name) %>%
     mutate(
       ID.pref = gsub('(.+)_(.+)', '\\1', Ph.ID)
     ) %>%
