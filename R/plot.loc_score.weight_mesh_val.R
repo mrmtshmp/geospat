@@ -140,7 +140,6 @@ plot.wSDG <- function(
           ID.pref, ID
         )
     ) %>%
-    dplyr::filter(ID.pref==30) %>%
     dplyr::left_join(
       long.long.df.res.distm.rank_1.merge_mesh_on_pharm
     )
@@ -160,7 +159,7 @@ plot.wSDG <- function(
     rbPal <-
       leaflet::colorQuantile(
         palette = "RdYlBu",
-        domain = long.long.df.res.distm.rank_1.merge_mesh_on_pharm$val,
+        domain = test.sptsDataframe@data$val,
         probs = vec.prob_q,
         reverse = TRUE
       )
@@ -194,6 +193,9 @@ plot.wSDG <- function(
         )
       )
     )
+
+  print(unique(test.sptsDataframe@data$Col))
+
   pdf(
     sprintf(
       "%s_%s.rank_%s.algscore_%s.pdf",
@@ -205,7 +207,7 @@ plot.wSDG <- function(
     width = 20,
     height = 20
   )
-  print(test.sptsDataframe@data$Col)
+
   plot(Shape.GovRegion, col='white', lwd=0.05)
   plot(Shape.SchoolRegion, col='ivory', lwd=0.05, add=TRUE)
   graphics::points(
@@ -260,5 +262,6 @@ plot.wSDG <- function(
   )
   dev.off()
 
+  return(fn.RData.loc_score,weight.var_name,rbPal, vec.prob_q)
 }
 
