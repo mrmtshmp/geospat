@@ -35,7 +35,7 @@ plot.wSDG <- function(
   rbPal = NULL,
   vec.prob_q = NULL,
   dir.Data = "../Data",
-  weight.var_name = "score.merged_PTD_2050",
+  weight.var_name = c("score.merged_PTD_2050","score.merged_PTE_2050"),
   fn.Shape.GovRegion = c(
     '/190706/N03-190101_30_GML/N03-19_30_190101.shp',
     '/190706/N03-190101_24_GML/N03-19_24_190101.shp',
@@ -150,7 +150,19 @@ plot.wSDG <- function(
   test.sptsDataframe@data <-
     sptsDataframe_data %>%
     dplyr::filter(
-      weight == weight.var_name
+      weight %in% weight.var_name
+      ) %>%
+    ddply(
+      .(
+      ID.pref,
+      ID,
+      Numb.FullTime,
+      Numb.PartTime,
+      Ph.ID
+      ),
+      function(D){
+        sum(D$val)
+        }
       )
 
   print(unique(test.sptsDataframe@data$ID.pref))
@@ -188,8 +200,11 @@ plot.wSDG <- function(
       sprintf(
         "%s_%s.rank_%s.algscore_%s.pdf",
         prefix.pdf_output,
-        unique(
-          test.sptsDataframe@data$weight
+        paste(
+          unique(
+            test.sptsDataframe@data$weight
+            ),
+          "_"
           ),
         rank.restrict,
         alg.score
@@ -203,13 +218,16 @@ plot.wSDG <- function(
     sprintf(
       "%s_%s.rank_%s.algscore_%s.pdf",
       prefix.pdf_output,
-      unique(test.sptsDataframe@data$weight),
+      paste(
+        unique(
+          test.sptsDataframe@data$weight
+          ),sep = " & "),
       rank.restrict,
       alg.score
-    ),
+      ),
     width = 20,
     height = 20
-  )
+    )
 
   plot(Shape.GovRegion, col='white', lwd=0.05)
   plot(Shape.SchoolRegion, col='ivory', lwd=0.05, add=TRUE)
@@ -250,7 +268,7 @@ plot.wSDG <- function(
 
   ggdata <-
     long.long.df.res.distm.rank_1.merge_mesh_on_pharm %>%
-    dplyr::filter(weight==weight.var_name) %>%
+    dplyr::filter(weight  %in% weight.var_name) %>%
     mutate(
       ID.pref = gsub('(.+)_(.+)', '\\1', Ph.ID)
     ) %>%
@@ -264,7 +282,7 @@ plot.wSDG <- function(
       scale_fill_identity(guide = "legend") +
       scale_x_continuous(trans = 'log10') +
       facet_grid(ID.pref~., scales = 'free_y') +
-      ggtitle(label = weight.var_name) +
+      ggtitle(label = paste(weight.var_name, sep = " & ")) +
       theme_bw()
   )
   dev.off()
