@@ -151,7 +151,9 @@ plot.wSDG <- function(
     sptsDataframe_data %>%
     dplyr::filter(
       weight == weight.var_name
-    )
+      )
+
+  print(unique(test.sptsDataframe@data$ID.pref))
 
 
   if(is.null(rbPal)){
@@ -176,10 +178,9 @@ plot.wSDG <- function(
     )
 
   Col.uni <-
-    rbPal(
-      quantile(long.long.df.res.distm.rank_1.merge_mesh_on_pharm$val, vec.prob_q)
-    ) %>%
-    unique()
+    unique(
+      test.sptsDataframe@data$Col
+      )
 
   print(
     sprintf(
@@ -187,7 +188,9 @@ plot.wSDG <- function(
       sprintf(
         "%s_%s.rank_%s.algscore_%s.pdf",
         prefix.pdf_output,
-        unique(test.sptsDataframe@data$weight),
+        unique(
+          test.sptsDataframe@data$weight
+          ),
         rank.restrict,
         alg.score
         )
@@ -235,7 +238,9 @@ plot.wSDG <- function(
     graphics::points(
       test.sptsDataframe[test.sptsDataframe@data$Col==Col.uni[i],],
       col=
-        test.sptsDataframe@data$Col[test.sptsDataframe@data$Col==Col.uni[i]],
+        test.sptsDataframe@data$Col[
+          test.sptsDataframe@data$Col==Col.uni[i]
+          ],
       pch=2,
       cex=1
     )
