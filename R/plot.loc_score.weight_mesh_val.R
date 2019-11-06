@@ -287,7 +287,6 @@ plot.wSDG <- function(
       ggtitle(label = paste(weight.var_name, sep = " & ")) +
       theme_bw()
   )
-  dev.off()
 
   ggdata <-
     long.long.df.res.distm.rank_1.merge_mesh_on_pharm %>%
